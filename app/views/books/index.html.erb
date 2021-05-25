@@ -1,8 +1,8 @@
 <div class="container px-5 px-sm-0">
-  <% if @book_new.errors.any? %>
-  <%= @book_new.errors.count %>errors prohibited this book from being saved:
+  <% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this book from being saved:
     <ul>
-      <% @book_new.errors.full_messages.each do |message| %>
+      <% @book.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>

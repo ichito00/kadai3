@@ -27,11 +27,6 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  def create
-    @user = User.new(name: params[:name])
-    @user.save
-    redirect_to("books/index")
-  end
   private
 
   def autheniticate_user
