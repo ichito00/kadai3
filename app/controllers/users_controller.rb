@@ -2,14 +2,15 @@ class UsersController < ApplicationController
   before_action :forbid_login_user, {only: [:top]}
 
   def index
+
+    @book = Book.new
     @users = User.all
-    @book_new = Book.new
     @user = current_user
   end
   def show
     @user = User.find(params[:id])
     @books = @user.books
-    @book_new = Book.new
+    @book = Book.new
   end
   def edit
     @user = User.find(params[:id])
@@ -26,6 +27,11 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+  def create
+    @user = User.new(name: params[:name])
+    @user.save
+    redirect_to("books/index")
+  end
   private
 
   def autheniticate_user
@@ -37,6 +43,12 @@ class UsersController < ApplicationController
   def forbid_login_user
     if @current_user
       redirect_to edit_user_path(@user)
+    end
+  end
+  def correct_user
+    @user = User.find(params[:id])
+    if current_user != @user
+       redirect_to user_path(current_user.id)
     end
   end
 
